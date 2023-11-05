@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        workSans: "'Work Sans', sans-serif"
+        poppins: "'Poppins', sans-serif"
       },
       animation: {
         example: 'example 20s linear 2s infinite normal',

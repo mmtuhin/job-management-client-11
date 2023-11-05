@@ -25,7 +25,7 @@ const ThemeChanger = () => {
 
 
   return (
-    <div >
+    <div className="flex items-center">
       <label className="swap swap-rotate">
         {/* this hidden checkbox controls the state */}
         <input
