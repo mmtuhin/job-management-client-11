@@ -1,16 +1,38 @@
 import { FcGoogle } from "react-icons/fc";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const {login, user} = useAuth()
+  const [email, setEmail] = useState(null)
+  const [password, setPassword] = useState(null)
+  const navigate = useNavigate()
+  console.log(user);
 
-    const {login, user} = useAuth()
-    console.log(user);
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    const toastId = toast.loading("Logging In...")
+
+    console.log(email, password);
+    try{
+       await login(email, password)
+       console.log(user);
+       toast.success("Log In successfull!", {id : toastId})
+      navigate('/')
+    }
+    catch(err){
+      toast.err(err.message, {id: toastId})
+    }
+  }
+
+    
 
   return (
     <div className="font-workSans flex">
-      <div className="relative max-w-xl flex-1">
+      <div className="hidden md:block relative max-w-xl flex-1">
         <div className=" h-[100vh] bg-[#171a53] overflow-hidden relative">
           <img
             src="image.webp"
@@ -28,7 +50,7 @@ const Login = () => {
       {/* Form Starts Here */}
       <div className=" flex-grow items-center justify-center flex">
         <div className="max-w-xl border border-blue-600 p-10 drop-shadow-md">
-          <form className="p-4 w-full">
+          <form className="p-4 w-full" onSubmit={handleLogin}>
             
             <button className="hover:bg-slate-300 flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md">
               <FcGoogle></FcGoogle>Sign in with Google
@@ -43,6 +65,7 @@ const Login = () => {
               placeholder="Your Email"
               name="email"
               className="w-full py-2 px-6 rounded-md border border-base-900"
+              onBlur={e => setEmail(e.target.value)}
             />
             <br />
             <input
@@ -50,6 +73,7 @@ const Login = () => {
               placeholder="Password"
               name="password"
               className="w-full py-2 px-6 rounded-md my-4 border border-base-900"
+              onBlur={e => setPassword(e.target.value)}
             />
             <br />
             <button type="submit" className="bg-[#171a53] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md">

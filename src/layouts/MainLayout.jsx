@@ -3,8 +3,10 @@ import SingleLink from "../components/SingleLink.jsx/SingleLink";
 import { Link } from "react-router-dom";
 import ThemeChanger from "../components/shared/ThemeChanger";
 import Footer from "../components/Footer/Footer";
+import useAuth from "../hooks/useAuth";
 
 const MainLayout = ({ children }) => {
+  const {user, logOut} = useAuth()
   const links = (
     <>
       <SingleLink path={"alljobs"} linkTitle={"All Jobs"}></SingleLink>
@@ -52,12 +54,21 @@ const MainLayout = ({ children }) => {
 
             <div className="flex items-center justify-center gap-3">
               <ThemeChanger></ThemeChanger>
-              <button
+              {
+                user?.email? <button
                 type="submit"
                 className="bg-[#171a53] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
+                onClick={logOut}
               >
-                <Link to="/login">Login</Link>
+              Log Out
               </button>
+              :<button
+              type="submit"
+              className="bg-[#171a53] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
+            >
+              <Link to="/login">Login</Link>
+            </button>
+              }
             </div>
           </div>
           {/* Page content here */}

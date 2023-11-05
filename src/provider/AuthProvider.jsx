@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../config/firebase.config";
 
@@ -19,24 +19,34 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
+    //User Signout
+    const logOut = () => {
+        setIsLoading(true)
+        return signOut(auth)
+    }
+
+    //user tracking
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+             setUser(user);
+             setIsLoading(false)
+           });
+ 
+         return () => {
+             return unsubscribe();
+         }
+     },[])
+
     //This values will be pass to the whole Application
     const values = {
         user,
         isLoading,
         createUser,
         login,
+        logOut
     }
 
-    useEffect(() => {
-       const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user);
-            setIsLoading(false)
-          });
 
-        return () => {
-            return unsubscribe();
-        }
-    },[])
 
     return (
         <AuthContext.Provider value={values}>
