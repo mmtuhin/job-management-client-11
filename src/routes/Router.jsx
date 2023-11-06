@@ -41,6 +41,7 @@ const router = createBrowserRouter([
             {
                 path:'addjob',
                 element: <AddJob></AddJob>,
+                loader: () => fetch('http://localhost:5000/api/v1/job_categories')
             },
             {
                 path:'alljobs',

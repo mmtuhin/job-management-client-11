@@ -1,25 +1,45 @@
 import { useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
-  const {createUser, user} = useAuth()
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
+  const { createUser, updateUser, logOut } = useAuth();
+  const [name, setName] = useState(null);
+  const [photoLink, setPhotoLink] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [err, setErr] = useState();
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    console.log(email, password);
-    try{
-      await createUser(email, password)
-      console.log("User Created: ", user);
+    //Password Validation
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{6,})/;
+    const passwordValid = passwordRegex.test(password);
+
+    if (!passwordValid) {
+      const errorMessage =
+        "Password must be at least 6 characters long, contain at least one capital letter, and contain at least one special character.";
+
+      setErr(errorMessage);
+      toast.error(err);
+      return;
+    } else {
+      console.log(email, password, name, photoLink);
+      try {
+        await createUser(email, password);
+        await updateUser(name, photoLink);
+        e.target.reset();
+        await logOut();
+        navigate("/login");
+      } catch (error) {
+        console.log(error);
+      }
     }
-    catch(err){
-      console.log(err);
-    }
-  }
+  };
 
   return (
     <div className="font-workSans w-full ">
@@ -40,6 +60,8 @@ const Register = () => {
             placeholder="Full Name"
             name="name"
             className="w-full py-2 px-6 rounded-md border border-base-900 mb-4"
+            onBlur={(e) => setName(e.target.value)}
+            required
           />
           <br />
           <input
@@ -47,6 +69,8 @@ const Register = () => {
             placeholder="Photo URL..."
             name="ProfilePhotoUrl"
             className="w-full py-2 px-6 rounded-md border border-base-900 mb-4"
+            onBlur={(e) => setPhotoLink(e.target.value)}
+            required
           />
           <br />
           <input
@@ -54,7 +78,8 @@ const Register = () => {
             placeholder="Your Email"
             name="email"
             className="w-full py-2 px-6 rounded-md border border-base-900"
-            onBlur={e => setEmail(e.target.value)}
+            onBlur={(e) => setEmail(e.target.value)}
+            required
           />
           <br />
           <input
@@ -62,7 +87,8 @@ const Register = () => {
             placeholder="Password"
             name="password"
             className="w-full py-2 px-6 rounded-md my-4 border border-base-900"
-            onBlur={e => setPassword(e.target.value)}
+            onBlur={(e) => setPassword(e.target.value)}
+            required
           />
           <br />
           <button
@@ -72,7 +98,7 @@ const Register = () => {
             Register<FaArrowRightLong></FaArrowRightLong>
           </button>
           <button className="text-sm mt-4 underline">
-            <Link to='/login'>
+            <Link to="/login">
               Have an account?{" "}
               <span className="font-bold text-[#171a53]">Login</span>
             </Link>

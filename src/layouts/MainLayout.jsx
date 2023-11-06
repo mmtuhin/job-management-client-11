@@ -57,14 +57,14 @@ const MainLayout = ({ children }) => {
               {
                 user?.email? <button
                 type="submit"
-                className="bg-[#171a53] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
+                className="bg-[#219653] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
                 onClick={logOut}
               >
               Log Out
               </button>
               :<button
               type="submit"
-              className="bg-[#171a53] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
+              className="bg-[#219653] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
             >
               <Link to="/login">Login</Link>
             </button>
