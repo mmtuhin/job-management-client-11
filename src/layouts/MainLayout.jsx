@@ -1,11 +1,13 @@
 import { PiOfficeChairFill } from "react-icons/pi";
 import SingleLink from "../components/SingleLink.jsx/SingleLink";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ThemeChanger from "../components/shared/ThemeChanger";
 import Footer from "../components/Footer/Footer";
 import useAuth from "../hooks/useAuth";
+import NotFound from "../pages/NotFound/NotFound";
 
 const MainLayout = ({ children }) => {
+  const {state} = useLocation()
   const {user, logOut} = useAuth()
   const links = (
     <>
@@ -17,7 +19,7 @@ const MainLayout = ({ children }) => {
       <SingleLink path={"appliedjobs"} linkTitle={"Applied Jobs"}></SingleLink>
     </>
   );
-  return (
+   return state?.from == '404' ? ( <NotFound/>):  (
     <div className="flex flex-col justify-between min-h-screen">
       <div className="drawer font-poppins">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -93,6 +95,7 @@ const MainLayout = ({ children }) => {
       <Footer></Footer>
     </div>
   );
+  
 };
 
 export default MainLayout;
