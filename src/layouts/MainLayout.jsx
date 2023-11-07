@@ -9,8 +9,12 @@ const MainLayout = ({ children }) => {
   const {user, logOut} = useAuth()
   const links = (
     <>
+    <SingleLink path={""} linkTitle={"Home"}></SingleLink>
       <SingleLink path={"alljobs"} linkTitle={"All Jobs"}></SingleLink>
       <SingleLink path={"blogs"} linkTitle={"Blogs"}></SingleLink>
+      <SingleLink path={"addjob"} linkTitle={"Add Job"}></SingleLink>
+      <SingleLink path={"myjobs"} linkTitle={"My Jobs"}></SingleLink>
+      <SingleLink path={"appliedjobs"} linkTitle={"Applied Jobs"}></SingleLink>
     </>
   );
   return (

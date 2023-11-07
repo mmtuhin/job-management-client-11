@@ -8,8 +8,6 @@ import toast from "react-hot-toast";
 const AddJob = () => {
   const { user } = useAuth();
   const jobCategories = useLoaderData();
-  console.log(jobCategories);
-  jobCategories.map(c => console.log(c))
   const postUserName = user?.displayName || "Not found";
   const postUserEmail = user?.email;
 
@@ -27,8 +25,7 @@ const AddJob = () => {
   const [companyImgUrl, setCompanyImgUrl] = useState(null);
   const [description, setDescription] = useState(null);
   const [jobTitle, setJobTitle] = useState(null);
-
-  
+  const applicantsNumber = 0
 
   const newJob = {
     jobCategory,//array[id, type]
@@ -40,8 +37,9 @@ const AddJob = () => {
     jobLocation,
     description,
     jobTitle,
-    postUserName,//auto
-    postUserEmail,//auto
+    applicantsNumber,//auto 0
+    postUserName,//auto logged in user
+    postUserEmail,//auto loggedin user
   };
   console.log(newJob);
 
@@ -80,21 +78,21 @@ const AddJob = () => {
           required
         />
 
-        <select
+        <select defaultValue={'Default'}
           className="py-2 px-4 w-full rounded-md border border-base-300 mb-4"
           onBlur={(e) => {
             setJobCategory(e.target.value)
 
           }}
         >
-          <option disabled selected>
+          <option value='Default' disabled selected>
             Select
           </option>
           {jobCategories.map((jobCategory) => (
             <option
               className="w-full"
               key={jobCategory._id}
-            value={jobCategory._id}
+            value={jobCategory.jobCategory}
             >
               {jobCategory.jobCategory}
             </option>

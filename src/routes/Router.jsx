@@ -8,6 +8,7 @@ import Register from "../pages/Register/Register";
 import MyJobs from "../pages/MyJobs/MyJobs";
 import AddJob from "../pages/AddJob.jsx/AddJob";
 import PrivateRouter from "./PrivateRouter";
+import AppliedJobs from "../pages/AppliedJobs/AppliedJobs";
 
 const router = createBrowserRouter([
     {
@@ -16,11 +17,13 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Home></Home>
+                element: <Home></Home>,
+                loader: () => fetch('http://localhost:5000/api/v1/jobs')
             },
             {
                 path: 'alljobs',
-                element: <AllJobs></AllJobs>
+                element: <AllJobs></AllJobs>,
+                loader: () => fetch('http://localhost:5000/api/v1/jobs')
             },
             {
                 path: 'blogs',
@@ -47,6 +50,10 @@ const router = createBrowserRouter([
                 path:'alljobs',
                 element: <AllJobs></AllJobs>,
             },
+            {
+                path:'appliedjobs',
+                element: <AppliedJobs></AppliedJobs>
+            }
         ]
     },
 
