@@ -81,7 +81,7 @@ const Home = () => {
 
           {jobCategories.map((c, index) => (
             <TabPanel key={c._id}>
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {jobs
                   .filter(
                     (job) =>

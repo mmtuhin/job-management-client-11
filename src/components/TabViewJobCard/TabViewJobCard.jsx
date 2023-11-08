@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 
 const TabViewJobCard = ({ job }) => {
-  const { _id ,jobTitle, postDate, submitDeadline, applicantsNumber, postUserName
-  } = job;
+  const { _id ,jobTitle, postDate, submitDeadline, applicantsNumber, postUserName,companyImgUrl,salary} = job;
   // const mongoDBPostdate = postDate;
   // const mongoDBPostdate
   const postDay = new Date(postDate);
@@ -15,11 +14,11 @@ const TabViewJobCard = ({ job }) => {
         <div className="">
           <h1 className="font-bold">{jobTitle}</h1>
           <p className="text-sm">Applicants: {applicantsNumber}</p>
-          <p className="text-sm font-semibold">Salary: {}</p>
+          <p className="text-sm font-semibold">Salary: {salary}</p>
         </div>
         <img
           className="border rounded border-slate-400 p-2"
-          src="https://hotjobs.bdjobs.com/logos/ProfessorsProkashon48.jpg"
+          src={companyImgUrl}
           alt=""
         />
       </div>
