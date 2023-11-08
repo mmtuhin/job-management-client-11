@@ -11,12 +11,22 @@ const JobDetails = () => {
     const applicantEmail = user.email
     const applicantName = user.displayName
 
-    console.log(applicantEmail);
+    
     const jobData = useLoaderData()
     const {_id, jobCategory, bannerUrl, postDate, submitDeadline, companyImgUrl, companyName, jobLocation, description, jobTitle, postUserName, postUserEmail} = jobData
 
     const jobId = _id
+    const currentDate = new Date();
+    const deadline = new Date(submitDeadline);
 
+    console.log(applicantEmail);
+    console.log(postUserEmail);
+
+    // console.log(deadline);
+    // console.log(currentDate);
+    console.log(applicantEmail !== postUserEmail);
+
+    // console.log(deadline>=currentDate || applicantEmail == postUserEmail);
 
     const handleApply =async () => {
         console.log('Applied');
@@ -24,12 +34,13 @@ const JobDetails = () => {
         
        
         
-        const inputValue = "Enter Resume Link";
+        //const inputValue = "Enter Resume Link";
         const { value: cvLink } =await Swal.fire({
-          title: "Enter your resume",
+          title: applicantName,
           input: "text",
-          inputLabel: "Your IP address",
-          inputValue,
+          inputPlaceholder: "Resume URL...",
+          inputLabel: applicantEmail,
+          // inputValue,
           showCancelButton: true,
           inputValidator: (value) => {
             if (!value) {
@@ -54,7 +65,7 @@ const JobDetails = () => {
             .then((data) => {
               console.log(data);
               if (data.insertedId) {
-                toast.success("Applied Successfull.");
+                toast.success("Applied Successfully.");
               } else if (data.message) {
                 toast.error(data.message);
               }
@@ -65,7 +76,10 @@ const JobDetails = () => {
     return (
         <div>
             <h1>{jobTitle}</h1>
-            <button onClick={handleApply} className="btn btn-primary">Apply</button>
+            {
+              (deadline>=currentDate && applicantEmail !== postUserEmail) ? <button onClick={handleApply} className="btn btn-primary">Apply</button> 
+              : <p className="btn btn-sm btn-warning">Can not apply</p>
+            }
         </div>
     );
 };
