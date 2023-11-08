@@ -69,7 +69,7 @@ const AddJob = () => {
 
   };
   return (
-    <form className="p-6 max-w-xl border border-sky-700 mx-auto" onSubmit={handleAddJob}>
+    <form className="p-6 max-w-xl border border-sky-700 mx-auto my-8 " onSubmit={handleAddJob}>
       <h1 className="text-center text-xl font-bold mb-4">Add a job</h1>
       {/* first Row */}
       <div className="flex gap-8">
@@ -88,10 +88,10 @@ const AddJob = () => {
 
           }}
         >
-          <option value='Default' disabled selected>
+          <option value='Default' disabled>
             Select
           </option>
-          {jobCategories.map((jobCategory) => (
+          {jobCategories?.map((jobCategory) => (
             <option
               className="w-full"
               key={jobCategory._id}
@@ -175,7 +175,7 @@ const AddJob = () => {
       <br />
       <button
         type="submit"
-        className="bg-[#171a53] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
+        className="bg-[#171a53] dark:bg-[#454a9b] hover:bg-[#454a9b] dark:hover:bg-sky-800 text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
       >
         Register
       </button>

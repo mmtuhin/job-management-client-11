@@ -40,16 +40,18 @@ const router = createBrowserRouter([
                 element: <Register></Register>,
             },
             {
-                path:'myjobs',
+                path:'myjobs/:email',
                 element: <PrivateRouter><MyJobs></MyJobs></PrivateRouter>,
+                loader: ({params}) => fetch(`http://localhost:5000/myjobs/${params.email}`)
             },
             {
                 path:'addjob',
                 element: <PrivateRouter><AddJob></AddJob></PrivateRouter>,
                 loader: () => fetch('http://localhost:5000/api/v1/job_categories')
+                
             },
             {
-                path: '/jobdetails/:id',
+                path: 'jobdetails/:id',
                 element: <PrivateRouter><JobDetails></JobDetails></PrivateRouter>,
                 loader: ({params}) => fetch(`http://localhost:5000/jobdetails/${params.id}`)
             },
@@ -58,8 +60,9 @@ const router = createBrowserRouter([
                 element: <AllJobs></AllJobs>,
             },
             {
-                path:'appliedjobs',
-                element: <PrivateRouter><AppliedJobs></AppliedJobs></PrivateRouter>
+                path:'appliedjobs/:loggeduseremail',
+                element: <PrivateRouter><AppliedJobs></AppliedJobs></PrivateRouter>,
+                loader: ({params}) => fetch(`http://localhost:5000/appliedjobs/${params.loggeduseremail}`)
             },
             
         ]

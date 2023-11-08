@@ -7,19 +7,28 @@ import useAuth from "../hooks/useAuth";
 import NotFound from "../pages/NotFound/NotFound";
 
 const MainLayout = ({ children }) => {
-  const {state} = useLocation()
-  const {user, logOut} = useAuth()
+  const { state } = useLocation();
+  const { user, logOut } = useAuth();
+
   const links = (
     <>
-    <SingleLink path={""} linkTitle={"Home"}></SingleLink>
+      <SingleLink path={""} linkTitle={"Home"}></SingleLink>
       <SingleLink path={"alljobs"} linkTitle={"All Jobs"}></SingleLink>
       <SingleLink path={"blogs"} linkTitle={"Blogs"}></SingleLink>
       <SingleLink path={"addjob"} linkTitle={"Add Job"}></SingleLink>
-      <SingleLink path={"myjobs"} linkTitle={"My Jobs"}></SingleLink>
-      <SingleLink path={"appliedjobs"} linkTitle={"Applied Jobs"}></SingleLink>
+      <SingleLink
+        path={`myjobs/${user?.email}`}
+        linkTitle={"My Jobs"}
+      ></SingleLink>
+      <SingleLink
+        path={`appliedjobs/${user?.email}`}
+        linkTitle={"Applied Jobs"}
+      ></SingleLink>
     </>
   );
-   return state?.from == '404' ? ( <NotFound/>):  (
+  return state?.from == "404" ? (
+    <NotFound />
+  ) : (
     <div className="flex flex-col justify-between min-h-screen">
       <div className="drawer font-poppins">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -60,21 +69,35 @@ const MainLayout = ({ children }) => {
 
             <div className="flex items-center justify-center gap-3">
               <ThemeChanger></ThemeChanger>
-              {
-                user?.email? <button
-                type="submit"
-                className="bg-[#219653] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
-                onClick={logOut}
-              >
-              Log Out
-              </button>
-              :<button
-              type="submit"
-              className="bg-[#219653] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
-            >
-              <Link to="/login">Login</Link>
-            </button>
-              }
+              {user?.email ? (
+                <div className="flex gap-3">
+                  <div className="avatar">
+                    <div className="w-10 rounded-full">
+                        <img
+                          src={user?.photoURL}
+                          alt="Profile Photo"
+                          title={user?.displayName}
+                        />
+                    </div>
+                    
+
+                  </div>
+                  <button
+                    type="submit"
+                    className="bg-[#219653] hover:bg-[#454a9b] text-white text-sm flex w-full justify-center rounded-sm items-center border border-base-300  px-2 drop-shadow-md"
+                    onClick={logOut}
+                  >
+                    Log Out
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="submit"
+                  className="bg-[#219653] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
+                >
+                  <Link to="/login">Login</Link>
+                </button>
+              )}
             </div>
           </div>
           {/* Page content here */}
@@ -95,7 +118,6 @@ const MainLayout = ({ children }) => {
       <Footer></Footer>
     </div>
   );
-  
 };
 
 export default MainLayout;

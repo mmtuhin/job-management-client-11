@@ -36,7 +36,7 @@ const JobDetails = () => {
         
         //const inputValue = "Enter Resume Link";
         const { value: cvLink } =await Swal.fire({
-          title: applicantName,
+          title: applicantName || "User name",
           input: "text",
           inputPlaceholder: "Resume URL...",
           inputLabel: applicantEmail,
