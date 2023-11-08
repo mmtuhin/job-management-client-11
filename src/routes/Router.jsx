@@ -10,6 +10,7 @@ import AddJob from "../pages/AddJob.jsx/AddJob";
 import PrivateRouter from "./PrivateRouter";
 import AppliedJobs from "../pages/AppliedJobs/AppliedJobs";
 import NotFound from "../pages/NotFound/NotFound";
+import JobDetails from "../pages/JobDetails/JobDetails";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +47,11 @@ const router = createBrowserRouter([
                 path:'addjob',
                 element: <PrivateRouter><AddJob></AddJob></PrivateRouter>,
                 loader: () => fetch('http://localhost:5000/api/v1/job_categories')
+            },
+            {
+                path: '/jobdetails/:id',
+                element: <PrivateRouter><JobDetails></JobDetails></PrivateRouter>,
+                loader: ({params}) => fetch(`http://localhost:5000/jobdetails/${params.id}`)
             },
             {
                 path:'alljobs',

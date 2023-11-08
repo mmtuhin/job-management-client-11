@@ -18,19 +18,22 @@ const AddJob = () => {
   
   const [jobCategory, setJobCategory] = useState(null);
   const [bannerUrl, setBannerUrl] = useState(null);
-  const [postDate, setPostDate] = useState(new Date());
+  // const [postDate, setPostDate] = useState(new Date());
   const [submitDeadline, setSubmitDeadline] = useState(new Date());
   const [companyName, setCompanyName] = useState(null);
   const [jobLocation, setJobLocation] = useState(null);
   const [companyImgUrl, setCompanyImgUrl] = useState(null);
   const [description, setDescription] = useState(null);
   const [jobTitle, setJobTitle] = useState(null);
+  const [salary, setSalary] = useState('')
   const applicantsNumber = 0
+  const postDate = new Date();
 
   const newJob = {
     jobCategory,//array[id, type]
     bannerUrl,
     postDate,
+    salary,
     submitDeadline,
     companyImgUrl,
     companyName,
@@ -111,20 +114,14 @@ const AddJob = () => {
       {/* 3rd Row */}
 
       <div className="flex gap-8 mb-4">
-        <div className="border border-gray-300 flex-1 rounded flex flex-col">
-          <p className="text-sm pl-2">Job Posting Date:</p>
-        <DatePicker
-        showIcon
-          selected={postDate}
-          onChange={(date) => setPostDate(date)}
-          dateFormat="dd/MM/yyyy"
-          minDate={new Date()}
-          maxDate={new Date()}
-          showYearDropdown
-          
-          scrollableMonthYearDropdown
-        />
-        </div>
+        
+        <input
+        type="text"
+        placeholder="Salary"
+        className="w-full py-2 px-6 rounded-md border border-base-900 mb-4"
+        onBlur={(e) => setSalary(e.target.value)}
+        required
+      />
 
         <div className="border border-gray-300 rounded flex-1 flex flex-col">
         <p className="text-sm pl-2">Application Deadline:</p>

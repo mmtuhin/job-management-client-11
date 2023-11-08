@@ -5,6 +5,7 @@ import "react-tabs/style/react-tabs.css";
 import { useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
+import TabViewJobCard from "../../components/TabViewJobCard/TabViewJobCard";
 
 const Home = () => {
   const { user } = useAuth();
@@ -29,7 +30,7 @@ useEffect(() => {
       </div>
 
       {/* Tab section */}
-      <div>
+      <div className="flex justify-center my-4">
         {/* <Tabs defaultIndex={1} onSelect={index => console.log(index)}> */}
         <Tabs defaultIndex={0} onSelect={(index) => setSelectedCategory(index === jobCategories.length ? "All" : jobCategories[index].jobCategory)}>
           
@@ -41,26 +42,24 @@ useEffect(() => {
         
           {jobCategories.map((c, index) => (
             <TabPanel key={c._id}>
+              <div className="grid grid-cols-2 gap-8">
               {jobs
                 .filter((job) => selectedCategory === "All" || job.jobCategory === c.jobCategory)
                 .map((job) => (
-                  <div key={job._id}>
-                    <h2>{job.jobTitle}</h2>
-                    <p>{job.description}</p>
-                  </div>
+                  <TabViewJobCard key={job._id} job={job}></TabViewJobCard>
                 ))}
+              </div>
             </TabPanel>
           ))}
           
           <TabPanel>
+            <div className="grid grid-cols-2 gap-8">
             {
               jobs.map((job) => (
-                <div key={job._id}>
-                  <h2>{job.jobTitle}</h2>
-                  <p>{job.description}</p>
-                </div>
+                <TabViewJobCard key={job._id} job={job}></TabViewJobCard>
               ))
             }
+            </div>
           </TabPanel>
         </Tabs>
       </div>
