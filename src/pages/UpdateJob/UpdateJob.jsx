@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const UpdateJob = () => {
   const jobToBeUpdated = useLoaderData();
@@ -90,6 +91,9 @@ const UpdateJob = () => {
       className="p-6 max-w-xl border border-sky-700 mx-auto my-8 "
       onSubmit={handleUpdateJob}
     >
+      <Helmet>
+        <title>Applicruit | Update Job</title>
+      </Helmet>
       <h1 className="text-center text-xl font-bold mb-4">Update a job</h1>
       {/* first Row */}
       <div className="flex gap-8">
