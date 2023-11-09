@@ -5,7 +5,7 @@ import useAuth from "../hooks/useAuth";
 const PrivateRouter = ({children}) => {
     const {isLoading, user} = useAuth()
     if(isLoading){
-        return <h1>Loading........</h1>
+        return <span className="loading loading-spinner loading-lg"></span>
     }
 
     if(!isLoading && !user?.email){

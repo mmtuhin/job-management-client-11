@@ -4,8 +4,10 @@ import { AiFillEdit } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const MyJobs = () => {
+  const {isLoading} = useAuth()
   const myLoaderJobs = useLoaderData();
   const [myJobs, setMyJobs] = useState(myLoaderJobs);
   console.log(myJobs);
