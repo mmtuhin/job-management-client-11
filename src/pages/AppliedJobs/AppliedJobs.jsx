@@ -37,7 +37,7 @@ const AppliedJobs = () => {
               <th>Company</th>
               <th>Post Date</th>
               <th>Deadline</th>
-              <th>View Details</th>
+              
               </tr>
           </thead>
           <tbody>
@@ -50,11 +50,7 @@ const AppliedJobs = () => {
                 <td>{myjob.companyName}</td>
                 <td>{new Date(myjob.postDate).toLocaleDateString()}</td>
                 <td>{new Date(myjob.submitDeadline).toLocaleDateString()}</td>
-                <td className="text-center pl-6">
-                  
-                    <Link to={`/jobdetails/${myjob._id}`}><FaEye></FaEye></Link>
-                  
-                </td>
+                
               </tr>
             ))}
           </tbody>

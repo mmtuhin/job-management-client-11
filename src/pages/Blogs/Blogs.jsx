@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet-async";
 
 
 const Blogs = () => {
     return (
         <div>
+            <Helmet>
+        <title>Applicruit | Blogs</title>
+      </Helmet>
             <h1 className="text-center my-4">Access token and Refresh token</h1>
             <div className="border max-w-3xl text-center mx-auto">
             <p>An access token is a string representing an authorization issued to the client. Tokens represent specific scopes and duration of access, granted by the resource owner, and enforced by the resource server and authorization server.</p>

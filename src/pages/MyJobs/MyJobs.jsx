@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const MyJobs = () => {
   const {isLoading} = useAuth()
@@ -48,6 +49,9 @@ const MyJobs = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Applicruit | My Job</title>
+      </Helmet>
       <h1 className="text-center my-4 font-medium">
         Total created jobs: {myJobs.length}
       </h1>
