@@ -11,7 +11,7 @@ const Home = () => {
   const { user } = useAuth();
   const [jobCategories, setJobCategories] = useState([]);
   const jobs = useLoaderData();
-  console.log(jobs);
+  // console.log(jobs);
   const [selectedCategory, setSelectedCategory] = useState("null");
 
   useEffect(() => {

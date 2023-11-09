@@ -70,7 +70,7 @@ const MainLayout = ({ children }) => {
             <div className="flex items-center justify-center gap-3">
               <ThemeChanger></ThemeChanger>
               {user?.email ? (
-                <div className="flex gap-3">
+                <div className="flex items-center gap-3">
                   <div className="avatar">
                     <div className="w-10 rounded-full">
                         <img
@@ -84,7 +84,7 @@ const MainLayout = ({ children }) => {
                   </div>
                   <button
                     type="submit"
-                    className="bg-[#219653] hover:bg-[#454a9b] text-white text-sm flex w-full justify-center rounded-sm items-center border border-base-300  px-2 drop-shadow-md"
+                    className="bg-[#04AA6D] font-medium hover:bg-[#454a9b] text-white text-sm btn btn-sm rounded-md px-2"
                     onClick={logOut}
                   >
                     Log Out
@@ -93,7 +93,7 @@ const MainLayout = ({ children }) => {
               ) : (
                 <button
                   type="submit"
-                  className="bg-[#219653] hover:bg-[#454a9b] text-white flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md"
+                  className="bg-[#04AA6D] hover:bg-[#454a9b] text-white w-full rounded-md py-2 px-6 drop-shadow-md"
                 >
                   <Link to="/login">Login</Link>
                 </button>

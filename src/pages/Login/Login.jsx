@@ -55,10 +55,10 @@ const Login = () => {
           />
         </div>
         <div className="top-0 absolute w-full h-full text-white flex justify-center items-center">
-          <div>
+          <div className="border p-4">
             {/* <h1 className="text-4xl font-semibold text-center ">Sign in</h1>
             <p className="text-md my-4">Connecting Talent with Opportunity</p> */}
-            <button onClick={() => handleSocialSignIn(googleLogin)} className="hover:bg-slate-300 flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2 px-6 drop-shadow-md">
+            <button onClick={() => handleSocialSignIn(googleLogin)} className="hover:bg-slate-500 flex w-full justify-center rounded-md items-center gap-4 border border-base-300 py-2">
               <FcGoogle></FcGoogle>Sign in with Google
             </button>
             <form className="p-4 w-full" onSubmit={handleLogin}>

@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile, GoogleAuthProvider, signInWithPopup  } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../config/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
@@ -43,9 +44,27 @@ const AuthProvider = ({children}) => {
 
     //user tracking
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-             setUser(user);
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            const userEmail = currentUser?.email || user?.email; 
+            const loggedUser = {email: userEmail}
+             setUser(currentUser);
              setIsLoading(false)
+
+             //Issue a token for user
+             if(user){
+                
+                axios.post(('http://localhost:5000/jwt'),loggedUser, {withCredentials: true}) //Cross site access
+                .then(res => {
+                    console.log("Token Response",res.data);
+                })
+             }
+             else{
+                axios.post('http://localhost:5000/logout', loggedUser, {withCredentials: true})
+                .then(res => {
+                    console.log(res);
+                })
+             }
+
            });
  
          return () => {
