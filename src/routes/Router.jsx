@@ -43,7 +43,7 @@ const router = createBrowserRouter([
             {
                 path:'myjobs/:email',
                 element: <PrivateRouter><MyJobs></MyJobs></PrivateRouter>,
-                loader: ({params}) => fetch(`http://localhost:5000/myjobs/${params.email}`)
+                loader: ({params}) => fetch(`http://localhost:5000/myjobs/${params.email}`,{credentials: 'include'})
             },
             {
                 path:'addjob',

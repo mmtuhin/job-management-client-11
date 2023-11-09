@@ -38,7 +38,6 @@ const AppliedJobs = () => {
               <th>Post Date</th>
               <th>Deadline</th>
               <th>View Details</th>
-
               </tr>
           </thead>
           <tbody>
