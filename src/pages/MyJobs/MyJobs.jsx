@@ -22,7 +22,7 @@ const MyJobs = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/api/v1/jobs/${id}`, {
+        fetch(`https://applicruit-server.vercel.app/api/v1/jobs/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

@@ -41,7 +41,7 @@ const UpdateJob = () => {
   //   const postDate = new Date();
 
   useEffect(()=>{
-    fetch('http://localhost:5000/api/v1/job_categories')
+    fetch('https://applicruit-server.vercel.app/api/v1/job_categories')
     .then(res => res.json())
     .then(data => setJobCategories(data))
   },[])
@@ -67,7 +67,7 @@ const UpdateJob = () => {
     console.log("Update Hitted");
     console.log(updatedJob);
 
-    fetch(`http://localhost:5000/jobs/${_id}`, {
+    fetch(`https://applicruit-server.vercel.app/jobs/${_id}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

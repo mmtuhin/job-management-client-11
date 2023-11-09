@@ -15,7 +15,7 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("null");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/job_categories")
+    fetch("https://applicruit-server.vercel.app/api/v1/job_categories")
       .then((res) => res.json())
       .then((data) => setJobCategories(data));
   }, []);

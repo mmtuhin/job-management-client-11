@@ -52,12 +52,12 @@ const AuthProvider = ({children}) => {
              const loggedUser = {email: userEmail}
              //Issue a token for user
              if(currentUser) {
-                axios.post ('http://localhost:5000/jwt', loggedUser, {withCredentials: true}).then(res => {
+                axios.post ('https://applicruit-server.vercel.app/jwt', loggedUser, {withCredentials: true}).then(res => {
                     console.log(res.data);
                 })
              }
              else{
-                axios.post('http://localhost:5000/logout',loggedUser,{
+                axios.post('https://applicruit-server.vercel.app/logout',loggedUser,{
                     withCredentials: true
                 }).then(res => {
                     console.log(res.data);

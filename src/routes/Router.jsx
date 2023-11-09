@@ -17,16 +17,17 @@ const router = createBrowserRouter([
     {
         path:'/',
         element: <App></App>,
+        errorElement:<NotFound></NotFound>,
         children: [
             {
                 index: true,
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/api/v1/jobs')
+                loader: () => fetch('https://applicruit-server.vercel.app/api/v1/jobs')
             },
             {
                 path: 'alljobs',
                 element: <AllJobs></AllJobs>,
-                loader: () => fetch('http://localhost:5000/api/v1/jobs')
+                loader: () => fetch('https://applicruit-server.vercel.app/api/v1/jobs')
             },
             {
                 path: 'blogs',
@@ -43,24 +44,24 @@ const router = createBrowserRouter([
             {
                 path:'myjobs/:email',
                 element: <PrivateRouter><MyJobs></MyJobs></PrivateRouter>,
-                loader: ({params}) => fetch(`http://localhost:5000/myjobs/${params.email}`,{credentials: 'include'})
+                loader: ({params}) => fetch(`https://applicruit-server.vercel.app/myjobs/${params.email}`,{credentials: 'include'})
             },
             {
                 path:'addjob',
                 element: <PrivateRouter><AddJob></AddJob></PrivateRouter>,
-                loader: () => fetch('http://localhost:5000/api/v1/job_categories')
+                loader: () => fetch('https://applicruit-server.vercel.app/api/v1/job_categories')
                 
             },
             {
                 path: 'updateJob/:id',
                 element:<PrivateRouter><UpdateJob></UpdateJob></PrivateRouter>,
-                loader: ({params}) => fetch(`http://localhost:5000/jobdetails/${params.id}`)
+                loader: ({params}) => fetch(`https://applicruit-server.vercel.app/jobdetails/${params.id}`)
 
             },
             {
                 path: 'jobdetails/:id',
                 element: <PrivateRouter><JobDetails></JobDetails></PrivateRouter>,
-                loader: ({params}) => fetch(`http://localhost:5000/jobdetails/${params.id}`)
+                loader: ({params}) => fetch(`https://applicruit-server.vercel.app/jobdetails/${params.id}`)
             },
             {
                 path:'alljobs',
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
             {
                 path:'appliedjobs/:loggeduseremail',
                 element: <PrivateRouter><AppliedJobs></AppliedJobs></PrivateRouter>,
-                loader: ({params}) => fetch(`http://localhost:5000/appliedjobs/${params.loggeduseremail}`, {credentials: 'include'})
+                loader: ({params}) => fetch(`https://applicruit-server.vercel.app/appliedjobs/${params.loggeduseremail}`, {credentials: 'include'})
             },
             
         ]

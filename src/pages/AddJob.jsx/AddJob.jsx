@@ -49,7 +49,7 @@ const AddJob = () => {
   const handleAddJob = (e) => {
     e.preventDefault();
     //post to api
-    fetch("http://localhost:5000/api/v1/user/add_job", {
+    fetch("https://applicruit-server.vercel.app/api/v1/user/add_job", {
       method: "POST",
       headers: {
         "content-type": "application/json",
