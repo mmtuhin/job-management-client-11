@@ -45,26 +45,17 @@ const AuthProvider = ({children}) => {
     //user tracking
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            const userEmail = currentUser?.email || user?.email; 
-            const loggedUser = {email: userEmail}
+            
              setUser(currentUser);
              setIsLoading(false)
-
+             const userEmail = currentUser?.email || user?.email; 
+             const loggedUser = {email: userEmail}
              //Issue a token for user
-             if(user){
-                
-                axios.post(('http://localhost:5000/jwt'),loggedUser, {withCredentials: true}) //Cross site access
-                .then(res => {
-                    console.log("Token Response",res.data);
+             if(currentUser) {
+                axios.post ('http://localhost:5000/jwt', loggedUser, {withCredentials: true}).then(res => {
+                    console.log(res.data);
                 })
              }
-             else{
-                axios.post('http://localhost:5000/logout', loggedUser, {withCredentials: true})
-                .then(res => {
-                    console.log(res);
-                })
-             }
-
            });
  
          return () => {
